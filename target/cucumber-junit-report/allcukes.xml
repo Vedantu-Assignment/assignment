@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<testsuite failures="0" name="cucumber.runtime.formatter.JUnitFormatter" skipped="0" tests="1" time="94.00359">
+    <testcase classname="Testing MakeMyTrip Hotel Search" name="" time="94.00359">
+        <system-out><![CDATA[Given I navigate to makemytrip website......................................passed
+And I login using username "vedantu.assignment.2021@gmail.com" and password "Vedantu@2021".passed
+Then I navigate to hotels tab...............................................passed
+And I search Hotel in "Bangalore" for "2" Adults and "1" child of "2" years.passed
+Then I apply price filter of minimum "1000" to maximum "20000" and select first hotel.passed
+Then I remove the price filter and select first hotel.......................passed
+And I logout from makemytrip................................................passed
+]]></system-out>
+    </testcase>
+</testsuite>
