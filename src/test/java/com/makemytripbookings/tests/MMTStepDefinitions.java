@@ -5,9 +5,6 @@ import com.makemytrip.pages.HotelSelectorPage;
 import com.makemytrip.pages.LoginPage;
 import com.makemytrip.pages.LogoutPage;
 import com.makemytrip.pages.SearchResultPage;
-import com.relevantcodes.extentreports.ExtentReports;
-import com.relevantcodes.extentreports.ExtentTest;
-import com.relevantcodes.extentreports.LogStatus;
 
 import cucumber.api.java.After;
 import cucumber.api.java.Before;

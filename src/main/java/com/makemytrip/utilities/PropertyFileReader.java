@@ -8,6 +8,11 @@ import java.util.Properties;
 public class PropertyFileReader {
 	
 	public static String getPropertyValue(String propertyFile, String propertyName) {
+		/*
+		 * Goal: Utility method to read Automation's dependent parameters from property file
+		 * Parameters : propertyFile: Name of property file to refer
+		 * 				propertyName: Name of property to be read
+		 */
 		Properties prop = new Properties();
 		InputStream input = null;
 		String propertyValue = "";

@@ -1,5 +1,9 @@
 package com.makemytrip.utilities;
 
+/*
+ * Goal: To read property values and provide to Automation Framework
+ */
+
 public class DOMElementIdentifierReader {
 	
 	static String propertyFile = "DOMProperties.properties";

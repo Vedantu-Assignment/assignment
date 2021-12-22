@@ -15,6 +15,10 @@ import com.makemytrip.utilities.GeneralUtilties;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
+/*
+ * Goal: Hotel Selector class to provide Hotel Search Criteria
+ */
+
 public class HotelSelectorPage {
 
 	private WebDriver driver;
@@ -29,14 +33,25 @@ public class HotelSelectorPage {
 	}
 	
 	public void goToHotelsTab() {
+		/*
+		 * Goal: To navigate to Hotels page URL
+		 */
 		driver.get(DOMElementIdentifierReader.getHotelPageURL());
+		GeneralUtilties.sleep(10000);
 	}
 	
 	public void enterSearchCriteria(String cityName, int adultGuestCount, int childGuestCount, String childGuestAge, int numberOfDayAfterForBooking) {
-		
-		GeneralUtilties.sleep(5000);
-		
+		/*
+		 * Goal: To profile Hotel Room Booking search criteria
+		 * Parameters: cityName : name of the city where hotel is needed
+		 * 			   adultGuestCount : number of adult guests
+		 *             childGuestCount : number of child guests
+		 *             childGuestAge : age of child guest
+		 *             numberOfDayAfterForBooking: number of X days from current date
+		 */
 		try {
+			
+			
 			WebElement city = wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.id(DOMElementIdentifierReader.citySelector()))));
 			city.click();
 			WebElement cityAutoSuggest = driver.findElement(By.cssSelector(DOMElementIdentifierReader.cityAutoSuggestSelector()));

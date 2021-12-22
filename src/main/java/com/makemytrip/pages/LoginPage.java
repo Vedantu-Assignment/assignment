@@ -14,6 +14,9 @@ import com.makemytrip.utilities.GeneralUtilties;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
+/*
+ * Goal: Login Page class for navigating and performing SingleSignOn to MakeMyTrip Portal
+ */
 
 public class LoginPage {
 	
@@ -45,6 +48,11 @@ public class LoginPage {
 
 	
 	public String singleSignOnToMMT(String emailId, String secretKey) {
+		/*
+		 * Goal: Method to sign in to MakeMyTrip using Single Sign On
+		 * Parameters: emailId : emailId of the user
+		 * 			   secretKey : password of the user
+		 */
 		
 		boolean loginSuccessful = false;
 		
@@ -63,7 +71,7 @@ public class LoginPage {
 					email.sendKeys(emailId);
 					email.sendKeys(Keys.ENTER);
 					
-					GeneralUtilties.sleep(10000);
+					GeneralUtilties.sleep(5000);
 					
 					WebElement password = driver.findElement(By.name(DOMElementIdentifierReader.passwordSelector()));
 					password.sendKeys(secretKey);

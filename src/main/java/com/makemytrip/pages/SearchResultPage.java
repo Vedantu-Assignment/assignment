@@ -13,6 +13,10 @@ import com.makemytrip.utilities.GeneralUtilties;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
+/*
+ * Goal: Search Result Class to apply/remove price filter and search the hotel
+ */
+
 public class SearchResultPage {
 	
 	private WebDriver driver;
@@ -27,6 +31,11 @@ public class SearchResultPage {
 	}
 	
 	public void providePriceRangeFilterAndSelect(String max, String min) {
+		/*
+		 * Goal: To apply price range filter and select the hotel
+		 * Parameters: max : Maximum price range
+		 * 			   min : Minimum price range
+		 */
 		
 		mainWindowHandle = driver.getWindowHandle();
 		
@@ -64,6 +73,9 @@ public class SearchResultPage {
 	}
 	
 	public void removePriceRangeFilterAndSelect() {
+		/*
+		 * Goal: To remove price filter and select hotel
+		 */
 		try {
 			WebElement removeFilter = driver.findElement(By.cssSelector(DOMElementIdentifierReader.removeFilterSelector()));
 			removeFilter.click();

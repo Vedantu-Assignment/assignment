@@ -11,6 +11,10 @@ import com.makemytrip.utilities.GeneralUtilties;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
+/*
+ * Goal: Logout Page class to logout from MakeMyTrip Portal 
+ */
+
 public class LogoutPage {
 
 	private WebDriver driver;
@@ -22,6 +26,9 @@ public class LogoutPage {
 	}
 	
 	public void logout() {
+		/*
+		 * Goal: To logout from MakeMyTrip Portal
+		 */
 		try {
 			driver.get(DOMElementIdentifierReader.getProfilePageUrl());
 		

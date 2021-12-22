@@ -6,7 +6,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import org.openqa.selenium.OutputType;
@@ -19,6 +18,10 @@ public class GeneralUtilties {
 
 	
 	public static void sleep(int milliseconds) {
+		/*
+		 *	Goal: Method to make automation sleep for sometime for elements to load in DOM
+		 *	Parameters : milliseconds : Number of seconds to wait
+		 */
 		
 		try {
 			Thread.sleep(milliseconds);
@@ -29,6 +32,10 @@ public class GeneralUtilties {
 	}
 	
 	public static List<String> dateCalculator(int numberOfDays) {
+		/*
+		 *  Goal: To calculate checkin and checkout date X number of days ahead from current date
+		 *  Parameters: numberOfDays : Number of days from current date
+		 */
 		
 		List<String> checkInOutDates = new ArrayList<String>();
 		DateFormat dateFormat = new SimpleDateFormat("EEE MMM dd yyyy");
@@ -47,6 +54,10 @@ public class GeneralUtilties {
 	}
 	
 	public static String capture(WebDriver driver){
+		/*
+		 * Goal: In the event of failure or exception, screenshot of problem area to be taken and stored in ErrImages folder
+		 * Parameters: driver : Selenium Webdriver
+		 */
 		File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 		File Dest = new File(System.getProperty("user.dir") +"\\ErrImages\\" + System.currentTimeMillis()
 		+ ".png");
