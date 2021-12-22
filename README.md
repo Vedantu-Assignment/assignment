@@ -41,5 +41,9 @@ extract it to project's ChromeDriver folder
 
 `javac BookingReservationCukeRunner.java`
 
+or 
+
+`mvn test` from command prompt
+
 ### Assumptions
 `java1.8 is installed`
