@@ -28,7 +28,7 @@ public class HotelSelectorPage {
 		driver.get(DOMElementIdentifierReader.getHotelPageURL());
 	}
 	
-	public void enterSearchCriteria(String cityName, int adultGuestCount, int childGuestCount, String childGuestAge) {
+	public void enterSearchCriteria(String cityName, int adultGuestCount, int childGuestCount, String childGuestAge, int numberOfDayAfterForBooking) {
 		
 		GeneralUtilties.sleep(5000);
 		
@@ -39,10 +39,12 @@ public class HotelSelectorPage {
 		cityAutoSuggest.sendKeys(Keys.ARROW_DOWN);
 		cityAutoSuggest.sendKeys(Keys.ENTER);
 		
-		WebElement checkInDate = driver.findElement(By.xpath("//div[@class='DayPicker-Day'][@aria-label='Mon Dec 27 2021']"));
+		List<String> checkInOutDate = GeneralUtilties.dateCalculator(numberOfDayAfterForBooking); 
+		
+		WebElement checkInDate = driver.findElement(By.xpath("//div[@class='DayPicker-Day'][@aria-label='"+checkInOutDate.get(0)+"']"));
 		checkInDate.click();
 		
-		WebElement checkOutDate = driver.findElement(By.xpath("//div[@class='DayPicker-Day'][@aria-label='Tue Dec 28 2021']"));
+		WebElement checkOutDate = driver.findElement(By.xpath("//div[@class='DayPicker-Day'][@aria-label='"+checkInOutDate.get(1)+"']"));
 		checkOutDate.click();
 		
 		

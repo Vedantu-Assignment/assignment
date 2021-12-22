@@ -6,6 +6,7 @@ import com.makemytrip.pages.LoginPage;
 import com.makemytrip.pages.LogoutPage;
 import com.makemytrip.pages.SearchResultPage;
 
+import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -28,6 +29,11 @@ public class MMTStepDefinitions extends BaseTest{
 		logoutPage = new LogoutPage(driver);
 		
 	}
+	
+	@After
+	public void afterScenarios() {
+		tearDown();
+	}
 
 	@Given("^I navigate to makemytrip website$")
 	public void navigate_to_makemytrip_website() {
@@ -44,9 +50,9 @@ public class MMTStepDefinitions extends BaseTest{
 		hotelSelectorPage.goToHotelsTab();
 	}
 	
-	@And("^I search Hotel in \"(.*?)\" for \"(.*?)\" Adults and \"(.*?)\" child of \"(.*?)\" years$")
-	public void searchHotel(String city, String numberOfAdults, String numberOfChildren, String ageOfChild) {
-		hotelSelectorPage.enterSearchCriteria(city, Integer.parseInt(numberOfAdults), Integer.parseInt(numberOfChildren), ageOfChild);
+	@And("^I search Hotel in \"(.*?)\" for \"(.*?)\" Adults and \"(.*?)\" child of \"(.*?)\" years. I book after \"(.*?)\" days from now$")
+	public void searchHotel(String city, String numberOfAdults, String numberOfChildren, String ageOfChild, String numberOfDaysAfterForBooking) {
+		hotelSelectorPage.enterSearchCriteria(city, Integer.parseInt(numberOfAdults), Integer.parseInt(numberOfChildren), ageOfChild, Integer.parseInt(numberOfDaysAfterForBooking));
 	}
 	
 	@Then("^I apply price filter of minimum \"(.*?)\" to maximum \"(.*?)\" and select first hotel$")
