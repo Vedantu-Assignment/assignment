@@ -1,11 +1,19 @@
 package com.makemytrip.utilities;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+
+import com.google.common.io.Files;
 
 public class GeneralUtilties {
 
@@ -37,5 +45,21 @@ public class GeneralUtilties {
 		
 		return checkInOutDates;
 	}
+	
+	public static String capture(WebDriver driver){
+		File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+		File Dest = new File(System.getProperty("user.dir") +"\\ErrImages\\" + System.currentTimeMillis()
+		+ ".png");
+		String errflpath = Dest.getAbsolutePath();
+		
+		try {
+			Files.copy(scrFile, Dest);
+		}
+		catch(IOException ioException) {
+			System.out.println("Exception in taking Screenshot" +ioException);
+		}
+		
+		return errflpath;
+		}
 	
 }

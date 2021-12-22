@@ -11,15 +11,20 @@ import org.openqa.selenium.WebElement;
 
 import com.makemytrip.utilities.DOMElementIdentifierReader;
 import com.makemytrip.utilities.GeneralUtilties;
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
+
 
 public class LoginPage {
 	
 	private WebDriver driver;
 	String mainWindowHandle = "";
+	protected ExtentTest test;
 	
-	public LoginPage(WebDriver driver) {
+	public LoginPage(WebDriver driver, ExtentTest test) {
 		
 		this.driver = driver;
+		this.test = test;
 		
 	}
 	
@@ -27,13 +32,22 @@ public class LoginPage {
 		/*
 		 * Goal : To navigate to MakeMyTrip landing site
 		 */
-		driver.get(DOMElementIdentifierReader.getBaseURL());
-		mainWindowHandle = driver.getWindowHandle();
+		try {
+			driver.get(DOMElementIdentifierReader.getBaseURL());
+			mainWindowHandle = driver.getWindowHandle();
+			test.log(LogStatus.PASS, "Launched MakeMyTrip Site");
+		}
+		catch(Exception exception) {
+			test.log(LogStatus.FAIL, "Exception while loading MakeMyTrip Site"+exception);
+		}
 	
 	}
 
 	
 	public String singleSignOnToMMT(String emailId, String secretKey) {
+		
+		boolean loginSuccessful = false;
+		
 		WebElement login = driver.findElement(By.cssSelector(DOMElementIdentifierReader.getLoginSelector()));
 		login.click();
 		
@@ -55,7 +69,16 @@ public class LoginPage {
 					password.sendKeys(secretKey);
 					password.sendKeys(Keys.ENTER);
 					
+					loginSuccessful = true;
+					
 				}
+		}
+		
+		if(loginSuccessful) {
+			test.log(LogStatus.PASS, "Single Sign On Successful!");
+		}
+		else if(!loginSuccessful) {
+			test.log(LogStatus.FAIL, test.addScreenCapture(GeneralUtilties.capture(driver)) ,"Single Sign On Failed");
 		}
 		
 		GeneralUtilties.sleep(12000);

@@ -10,53 +10,75 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.makemytrip.utilities.DOMElementIdentifierReader;
 import com.makemytrip.utilities.GeneralUtilties;
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
 
 public class SearchResultPage {
 	
 	private WebDriver driver;
 	private WebDriverWait wait;
 	String mainWindowHandle = "";
+	protected ExtentTest test;
 	
-	public SearchResultPage(WebDriver driver) {
+	public SearchResultPage(WebDriver driver, ExtentTest test) {
 		this.driver = driver;
 		this.wait = new WebDriverWait(this.driver, 60);
+		this.test = test;
 	}
 	
 	public void providePriceRangeFilterAndSelect(String max, String min) {
 		
 		mainWindowHandle = driver.getWindowHandle();
 		
-		WebElement minRange = driver.findElement(By.name(DOMElementIdentifierReader.minSelector()));
-		minRange.sendKeys(min);
+		try {
+			WebElement minRange = driver.findElement(By.name(DOMElementIdentifierReader.minSelector()));
+			minRange.sendKeys(min);
 		
-		WebElement maxRange = driver.findElement(By.name(DOMElementIdentifierReader.maxSelector()));
-		maxRange.sendKeys(max);
+			WebElement maxRange = driver.findElement(By.name(DOMElementIdentifierReader.maxSelector()));
+			maxRange.sendKeys(max);
 		
-		WebElement applyFilter = driver.findElement(By.cssSelector(DOMElementIdentifierReader.filterApplySelector()));
-		applyFilter.click();
+			WebElement applyFilter = driver.findElement(By.cssSelector(DOMElementIdentifierReader.filterApplySelector()));
+			applyFilter.click();
+			
+			test.log(LogStatus.PASS, "Successfully applied price filter");
+		}
+		catch(Exception e) {
+			test.log(LogStatus.FAIL, test.addScreenCapture(GeneralUtilties.capture(driver)), "Failed while applying price filters");
+		}
 		
 		GeneralUtilties.sleep(10000);
 		
-		WebElement selectFirstSearchResult = wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.cssSelector(DOMElementIdentifierReader.searchResultSelector()))));
-		selectFirstSearchResult.click();
+		try {
+			WebElement selectFirstSearchResult = wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.cssSelector(DOMElementIdentifierReader.searchResultSelector()))));
+			selectFirstSearchResult.click();
 		
-		GeneralUtilties.sleep(10000);
-		
+			GeneralUtilties.sleep(10000);
+			test.log(LogStatus.PASS, "Successfully selected first hotel after applying price filter");
+		}
+		catch(Exception e) {
+			test.log(LogStatus.FAIL, test.addScreenCapture(GeneralUtilties.capture(driver)), "Failed selecting hotel after price filter application");
+		}
 		ArrayList<String> newTab = new ArrayList<String>(driver.getWindowHandles());
 		driver.switchTo().window(newTab.get(0));
 		
 	}
 	
 	public void removePriceRangeFilterAndSelect() {
+		try {
+			WebElement removeFilter = driver.findElement(By.cssSelector(DOMElementIdentifierReader.removeFilterSelector()));
+			removeFilter.click();
 		
-		WebElement removeFilter = driver.findElement(By.cssSelector(DOMElementIdentifierReader.removeFilterSelector()));
-		removeFilter.click();
-		
-		GeneralUtilties.sleep(4000);
+			GeneralUtilties.sleep(4000);
 
 		
-		WebElement selectFirstSearchResult1 = wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.cssSelector(DOMElementIdentifierReader.searchResultSelector()))));
-		selectFirstSearchResult1.click();
+			WebElement selectFirstSearchResult1 = wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.cssSelector(DOMElementIdentifierReader.searchResultSelector()))));
+			selectFirstSearchResult1.click();
+			test.log(LogStatus.PASS, "Successfully selected first hotel after removal of price filter");
+		}
+		catch(Exception e) {
+			test.log(LogStatus.FAIL, test.addScreenCapture(GeneralUtilties.capture(driver)), "Failed selecting hotel after removal of price filter");
+		}
+		
 		
 		driver.switchTo().window(mainWindowHandle);
 		

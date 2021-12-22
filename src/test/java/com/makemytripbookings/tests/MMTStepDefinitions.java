@@ -5,6 +5,9 @@ import com.makemytrip.pages.HotelSelectorPage;
 import com.makemytrip.pages.LoginPage;
 import com.makemytrip.pages.LogoutPage;
 import com.makemytrip.pages.SearchResultPage;
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
 
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
@@ -12,6 +15,7 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import tests.BaseTest;
+
 
 public class MMTStepDefinitions extends BaseTest{
 	
@@ -23,10 +27,10 @@ public class MMTStepDefinitions extends BaseTest{
 	@Before
 	public void beforeScenarios() {
 		
-		loginPage = new LoginPage(driver);
-		hotelSelectorPage = new HotelSelectorPage(driver);
-		searchResultPage = new SearchResultPage(driver);
-		logoutPage = new LogoutPage(driver);
+		loginPage = new LoginPage(driver, test);
+		hotelSelectorPage = new HotelSelectorPage(driver, test);
+		searchResultPage = new SearchResultPage(driver, test);
+		logoutPage = new LogoutPage(driver, test);
 		
 	}
 	
